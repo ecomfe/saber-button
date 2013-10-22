@@ -1,20 +1,20 @@
 {
-  "name": "saber-button",
-  "version": "0.1.0",
-  "description": "适用于移动端的Button封装",
-  "main": "button",
-  "contributors": [
-    { "name": "zfkun", "email": "zfkun@msn.com" }
-  ],
-  "contributors": [
-    { "name": "zfkun", "email": "zfkun@msn.com" }
-  ],
-  "dependencies": {
-    "saber-lang": "~0.1.0",
-    "saber-dom": "~0.0.1",
-    "saber-emitter": "~0.3.0",
-    "saber-control": "~0.1.0"
-  },
-  "repository": "git://github.com/zfkun/saber-button.git",
-  "license": "BSD"
+    "name": "saber-button",
+    "version": "0.1.0",
+    "description": "适用于移动端的Button封装",
+    "main": "button",
+    "contributors": [
+        { "name": "zfkun", "email": "zfkun@msn.com" }
+    ],
+    "contributors": [
+        { "name": "zfkun", "email": "zfkun@msn.com" }
+    ],
+    "dependencies": {
+        "saber-ui": "~0.1.0",
+        "saber-lang": "~0.1.0",
+        "saber-dom": "~0.0.1",
+        "saber-control": "~0.1.0"
+    },
+    "repository": "git://github.com/ecomfe/saber-button.git",
+    "license": "BSD"
 }

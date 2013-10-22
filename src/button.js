@@ -7,6 +7,7 @@
 
 define( function ( require ) {
 
+    var ui = require( 'saber-ui' );
     var Lang = require( 'saber-lang' );
     var DOM = require( 'saber-dom' );
     var Control = require( 'saber-control' );
@@ -111,6 +112,8 @@ define( function ( require ) {
     };
 
     Lang.inherits( Button, Control );
+
+    ui.register( Button );
 
     return Button;
 });

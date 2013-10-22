@@ -7,13 +7,14 @@
     .ui-button {
         min-width: 100px;
         height: 30px;
-        margin: 0 5px;
+        margin: 5px;
         border: 1px solid black;
         -webkit-tap-highlight-color: blue;
     }
+    .ui-button:active { background-color: green; border: 1px solid green; }
+    .ui-button:focus { background-color: blue; border: 1px solid blue; }
     .ui-button-disabled { background-color: gray; opacity: .5; }
     .ui-button-hidden { display: none; }
-    .ui-button-focus { background-color: blue; border: 1px solid blue; }
 
     #demo { border: 1px solid red; display: inline-block; }
     </style>
@@ -29,6 +30,11 @@
     <script>
     require.config({
         packages: [
+            {
+                name: 'saber-ui',
+                location: '../dep/saber-ui/src',
+                main: 'ui'
+            },
             {
                 name: 'saber-lang',
                 location: '../dep/saber-lang/src',
