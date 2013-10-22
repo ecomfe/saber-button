@@ -17,6 +17,9 @@ define( function ( require ) {
      * 按钮控件
      * 
      * @extends module:Control
+     * @requires ui
+     * @requires lang
+     * @requires dom
      * @requires Control
      * @exports Button
      */
@@ -29,8 +32,8 @@ define( function ( require ) {
         /**
          * 控件类型标识
          * 
-         * @type {string}
          * @private
+         * @type {string}
          */
         type: 'Button',
 
@@ -46,9 +49,9 @@ define( function ( require ) {
         /**
          * 创建控件主元素
          * 
+         * @override
          * @param {Object} options 构造函数传入的配置参数
          * @return {HTMLElement}
-         * @override
          */
         createMain: function() {
             return document.createElement('BUTTON');
@@ -56,10 +59,10 @@ define( function ( require ) {
 
         /**
          * 重新渲染视图
-         * 
          * 首次渲染时, 不传入 changes 参数
-         * @param {Object=} changes 变更过的属性的集合
+         * 
          * @override
+         * @param {Object=} changes 变更过的属性的集合
          */
         repaint: function( changes ) {
             // if ( !this.rendered ) return;
@@ -101,13 +104,13 @@ define( function ( require ) {
         },
 
         /**
-         * 设置内容
-         *
-         * @param {string} content 要设置的内容.
+         * 设置按钮内容
+         * 
          * @public
+         * @param {string} content 要设置的按钮内容
          */
         setContent: function ( content ) {
-            this.setProperties({ 'content': content });
+            this.setProperties( { 'content': content } );
         }
 
     };
@@ -117,4 +120,4 @@ define( function ( require ) {
     ui.register( Button );
 
     return Button;
-});
+} );
