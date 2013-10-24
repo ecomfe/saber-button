@@ -1,19 +1,20 @@
-define(function() {
+define(function () {
 
+    var lang = require( 'saber-lang' );
     var Button = require( 'saber-button' );
 
-    describe( 'Button', function() {
+    describe( 'Button', function () {
         
-        describe( 'Public API' , function() {
+        describe( 'Public API' , function () {
 
             it( '`new`', function () {
-                var b = new Button({ content: 'b1' });
+                var b = new Button({ content: 'new' });
                 expect( b instanceof Button ).toBeTruthy();
             });
 
             it( '`get`', function () {
                 var b = new Button({
-                    content: '.main',
+                    content: '.get',
                     foo: 'foo',
                     bar: [1, 2, 3]
                 });
@@ -35,7 +36,7 @@ define(function() {
 
             it( '`set`', function () {
                 var b = new Button({
-                    content: '.main',
+                    content: '.set',
                     foo: 'foo',
                     bar: [1, 2, 3]
                 });
@@ -72,7 +73,7 @@ define(function() {
             });
 
             it( '`enable`', function () {
-                var b = new Button( { content: 'test' } );
+                var b = new Button( { content: '.enable' } );
                 b.enable();
 
                 expect( b.isDisabled() ).toEqual( false );
@@ -82,7 +83,7 @@ define(function() {
             });
 
             it( '`disable`', function () {
-                var b = new Button( { content: 'test' } );
+                var b = new Button( { content: '.disable' } );
                 b.disable();
 
                 expect( b.isDisabled() ).toBeTruthy();
@@ -92,7 +93,7 @@ define(function() {
             });
 
             it( '`show`', function () {
-                var b = new Button( { content: 'test' } );
+                var b = new Button( { content: '.show' } );
                 b.show();
 
                 expect( b.isHidden() ).toEqual( false );
@@ -102,7 +103,7 @@ define(function() {
             });
 
             it( '`hide`', function () {
-                var b = new Button( { content: 'test' } );
+                var b = new Button( { content: '.hide' } );
                 b.hide();
 
                 expect( b.isHidden() ).toBeTruthy();
@@ -111,7 +112,127 @@ define(function() {
                 expect( b.hasState( 'hidden' ) ).toBeTruthy();
             });
 
+            it( '`setContent`', function () {
+                var b = new Button( { content: '.setContent' } );
+                b.setContent( 'customText' );
+
+                expect( b.content ).toEqual( 'customText' );
+                expect( b.get( 'content' ) ).toBeTruthy( 'customText' );
+            });
+
         });
+
+        describe( 'Event API', function () {
+            var events = {};
+            var handler = function ( ev ) {
+                events[ ev.type ] = arguments.length > 1
+                    ? [].slice.call( arguments, 1 )
+                    : true;
+
+                console.info( ev.type, arguments );
+            };
+
+            var b = new Button({
+                content: '.events',
+                onBeforeinit: handler,
+                onInit: handler,
+                onAfterinit: handler,
+                onBeforerender: handler,
+                onAfterrender: handler
+            });
+            b.on( 'beforedispose', handler )
+            .on( 'afterdispose', handler )
+            .on( 'show', handler )
+            .on( 'hide', handler )
+            .on( 'enable', handler )
+            .on( 'disable', handler )
+            .on( 'click', handler )
+            .on( 'propertychange', handler );
+
+            b.appendTo( document.querySelector( '#demo' ) );
+            b.main.click(); // TODO: touch env
+            b.hide();
+            b.disable();
+            b.show();
+            b.enable();
+            b.set( 'content', 'new content' );
+            b.dispose();
+
+
+            it( 'beforeinit', function () {
+                expect( events.beforeinit ).toBeTruthy();
+            });
+
+            it( 'init', function () {
+                expect( events.init ).toBeTruthy();
+            });
+
+            it( 'afterinit', function () {
+                expect( events.afterinit ).toBeTruthy();
+            });
+
+            it( 'beforerender', function () {
+                expect( events.beforerender ).toBeTruthy();
+            });
+
+            it( 'afterrender', function () {
+                expect( events.afterrender ).toBeTruthy();
+            });
+
+            it( 'beforedispose', function () {
+                expect( events.beforedispose ).toBeTruthy();
+            });
+
+            it( 'afterdispose', function () {
+                expect( events.afterdispose ).toBeTruthy();
+            });
+
+            it( 'show', function () {
+                expect( events.show ).toBeTruthy();
+            });
+
+            it( 'hide', function () {
+                expect( events.hide ).toBeTruthy();
+            });
+
+            it( 'enable', function () {
+                expect( events.enable ).toBeTruthy();
+            });
+
+            it( 'disable', function () {
+                expect( events.disable ).toBeTruthy();
+            });
+
+            it( 'click', function () {
+                expect( events.click ).toBeTruthy();
+            });
+
+            it( 'propertychange', function () {
+                expect(
+                    Array.isArray( events.propertychange )
+                ).toBeTruthy();
+                
+                expect( 
+                    Object.prototype.toString.call(
+                        events.propertychange[0]
+                    )
+                ).toEqual( '[object Object]' );
+
+                expect(
+                    events.propertychange[0].content.name
+                ).toEqual( 'content' );
+                
+                expect(
+                    events.propertychange[0].content.oldValue
+                ).toEqual( '.events' );
+
+                expect(
+                    events.propertychange[0].content.newValue
+                ).toEqual( 'new content' );
+            });
+
+        });
+
     });
 
 });

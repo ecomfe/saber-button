@@ -13,8 +13,12 @@
     }
     .ui-button:active { background-color: green; border: 1px solid green; }
     .ui-button:focus { background-color: blue; border: 1px solid blue; }
-    .ui-button-disabled { background-color: gray; opacity: .5; }
-    .ui-button-hidden { display: none; }
+    .ui-button.ui-button-disabled {
+        background-color: gray;
+        border: 1px solid black;
+        opacity: .5;
+    }
+    .ui-button.ui-button-hidden { display: none; }
 
     #demo { border: 1px solid red; display: inline-block; }
     </style>

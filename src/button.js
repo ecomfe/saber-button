@@ -6,11 +6,11 @@
  * @author zfkun(zfkun@msn.com)
  */
 
-define( function ( require ) {
+define(function ( require ) {
 
     var ui = require( 'saber-ui' );
-    var Lang = require( 'saber-lang' );
-    var DOM = require( 'saber-dom' );
+    var lang = require( 'saber-lang' );
+    var dom = require( 'saber-dom' );
     var Control = require( 'saber-control' );
 
     /**
@@ -37,12 +37,29 @@ define( function ( require ) {
          */
         type: 'Button',
 
-        init: function() {
+        init: function () {
             if ( !this.onClick ) {
                 this.main.addEventListener(
                     'click',
-                    this.onClick = this.emit.bind( this, 'click' )
+                    this.onClick = function ( event ) {
+                        if ( !this.isDisabled()
+                            && !this.isHidden() ) {
+                            this.emit.call( this, 'click', event );
+                        }
+                    }.bind( this )
                 );
+            }
+        },
+
+        dispose: function () {
+            Control.prototype.dispose.call( this );
+
+            // 清理所有DOM事件
+            var fn = this.onClick;
+            if ( fn ) {
+                this.main.removeEventListener( 'click', fn );
+                fn = this.onClick = null;
+                delete this.onClick;
             }
         },
 
@@ -73,12 +90,12 @@ define( function ( require ) {
             // see `Button#render` and `Control#setProperties`
             if ( !changes ) {
                 if ( this.hasOwnProperty( 'height' ) ) {
-                    DOM.setStyle( 'height', this.height );
-                    DOM.setStyle( 'lineHeight', this.height );
+                    dom.setStyle( 'height', this.height );
+                    dom.setStyle( 'lineHeight', this.height );
                 }
 
                 if ( this.hasOwnProperty( 'width' ) ) {
-                    DOM.setStyle( 'width', this.width );
+                    dom.setStyle( 'width', this.width );
                 }
 
                 main.innerHTML = this.content;
@@ -89,12 +106,12 @@ define( function ( require ) {
                 Control.prototype.repaint.call( this, changes );
 
                 if ( changes.hasOwnProperty( 'height' ) ) {
-                    DOM.setStyle( 'height', this.height );
-                    DOM.setStyle( 'lineHeight', this.height );
+                    dom.setStyle( 'height', this.height );
+                    dom.setStyle( 'lineHeight', this.height );
                 }
 
                 if ( changes.hasOwnProperty( 'width' ) ) {
-                    DOM.setStyle( 'width', this.width );
+                    dom.setStyle( 'width', this.width );
                 }
 
                 if ( changes.hasOwnProperty( 'content' ) ) {
@@ -115,9 +132,10 @@ define( function ( require ) {
 
     };
 
-    Lang.inherits( Button, Control );
+    lang.inherits( Button, Control );
 
     ui.register( Button );
 
     return Button;
-} );
+
+});
