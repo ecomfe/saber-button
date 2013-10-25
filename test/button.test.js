@@ -1,4 +1,4 @@
-define(function () {
+define(function() {
 
     var lang = require( 'saber-lang' );
     var Button = require( 'saber-button' );
@@ -128,8 +128,6 @@ define(function () {
                 events[ ev.type ] = arguments.length > 1
                     ? [].slice.call( arguments, 1 )
                     : true;
-
-                console.info( ev.type, arguments );
             };
 
             var b = new Button({

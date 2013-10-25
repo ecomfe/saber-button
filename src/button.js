@@ -38,30 +38,35 @@ define(function ( require ) {
         type: 'Button',
 
         init: function () {
-            if ( !this.onClick ) {
-                this.main.addEventListener(
-                    'click',
-                    this.onClick = function ( event ) {
-                        if ( !this.isDisabled()
-                            && !this.isHidden() ) {
-                            this.emit.call( this, 'click', event );
-                        }
-                    }.bind( this )
-                );
-            }
+            var me = this;
+            me.addDOMEvent(
+                me.main,
+                'click',
+                function ( ev ) {
+                    if ( !me.isDisabled() && !me.isHidden() ) {
+                        me.emit.call( me, 'click', ev );
+                    }
+                }
+            );
         },
 
-        dispose: function () {
-            Control.prototype.dispose.call( this );
+        // /**
+        //  * 销毁控件
+        //  * 
+        //  * @override
+        //  */
+        // dispose: function () {
+        //     // 调用父类清理先
+        //     Control.prototype.dispose.call( this );
 
-            // 清理所有DOM事件
-            var fn = this.onClick;
-            if ( fn ) {
-                this.main.removeEventListener( 'click', fn );
-                fn = this.onClick = null;
-                delete this.onClick;
-            }
-        },
+        //     // 清理Button类相关DOM事件
+        //     var fn = this.onClick;
+        //     if ( fn ) {
+        //         this.main.removeEventListener( 'click', fn );
+        //         fn = this.onClick = null;
+        //         delete this.onClick;
+        //     }
+        // },
 
         /**
          * 创建控件主元素
