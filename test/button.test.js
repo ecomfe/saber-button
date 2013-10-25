@@ -8,7 +8,7 @@ define(function() {
         describe( 'Public API' , function () {
 
             it( '`new`', function () {
-                var b = new Button({ content: 'new' });
+                var b = new Button( { content: 'new' } );
                 expect( b instanceof Button ).toBeTruthy();
             });
 
@@ -51,7 +51,7 @@ define(function() {
             });
 
             it( '`appendTo`', function () {
-                var b = new Button({ content: '.appendTo' });
+                var b = new Button( { content: '.appendTo' } );
                 var wrap = document.querySelector( '#demo' );
                 b.appendTo( wrap );
 
@@ -62,7 +62,7 @@ define(function() {
             });
 
             it( '`insertBefore`', function () {
-                var b = new Button({ content: '.insertBefore' });
+                var b = new Button( { content: '.insertBefore' } );
                 var wrap = document.querySelector( '#demo' );
                 b.insertBefore( wrap.firstChild );
 
@@ -227,6 +227,41 @@ define(function() {
                 expect(
                     events.propertychange[0].content.newValue
                 ).toEqual( 'new content' );
+            });
+
+        });
+
+        describe( 'DOMEvent API', function () {
+            var b = new Button( { content: '.addDOMEvent'  } );
+            var count = 0;
+            var handler = function ( ev ) {
+                count++;
+            };
+
+            it( '`addDOMEvent`', function () {
+                b.addDOMEvent( b.main, 'click', handler );
+                b.main.click(); // +1
+                expect( count ).toEqual( 1 );
+            });
+
+            it( '`removeDOMEvent`', function () {
+                b.main.click(); // +1
+                b.main.click(); // +1
+                b.removeDOMEvent( b.main, 'click', handler );
+                b.main.click(); // nothing
+                b.main.click(); // nothing
+                expect( count ).toEqual( 3 );
+            });
+
+            it( '`clearDOMEvents`', function () {
+                count = 0;
+                b.addDOMEvent( b.main, 'click', handler );
+                b.addDOMEvent( b.main, 'click', handler );
+                b.addDOMEvent( b.main, 'click', handler );
+                b.main.click(); // `capture` is false
+                b.clearDOMEvents( b.main );
+                b.main.click();
+                expect( count ).toEqual( 1 );
             });
 
         });
