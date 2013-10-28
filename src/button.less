@@ -1,0 +1,253 @@
+/**
+ * 基础按钮样式
+ */
+
+// 无图标线性渐变背景
+// @direction 渐变方向
+// @from-color 起始颜色
+// @to-color 终止颜色
+// @b-color 背景色
+.linear-gradient-background (
+    @direction:top, @from-color, @to-color, @b-color:transparent
+) {
+    @top: 0% 0%, 0% 100%;
+    @left: 0% 0%, 100% 0%;
+    @bottom: 0% 100%, 0% 0%;
+    @right: 100% 0%, 0% 0%;
+
+    background: @b-color;
+
+    // Safari 4-5, Chrome 1-9
+    background: 
+        -webkit-gradient(linear, @@direction, from(@from-color), to(@to-color));
+  
+    // Safari 5.1, Chrome 10+
+    background:
+        -webkit-linear-gradient(@direction, @from-color, @to-color);
+}
+
+ 
+// 带图标线性渐变背景
+// @direction 渐变方向
+// @from-color 起始颜色
+// @to-color 终止颜色
+// @image-url 背景前的第二背景图
+// @repeat-type 重叠方式 
+// @s-x x轴偏移
+// @s-y y轴偏移 
+// @b-color 背景色
+.linear-gradient-background-with-image (
+    @direction:top, @from-color, @to-color,
+    @image-url:"", 
+    @s-x:0, @s-y:0, 
+    @b-color:transparent,
+    @repeat-type:no-repeat
+) {
+    @top: 0% 0%, 0% 100%;
+    @left: 0% 0%, 100% 0%;
+    @bottom: 0% 100%, 0% 0%;
+    @right: 100% 0%, 0% 0%;
+    background: 
+        url("@{base-url}@{image-url}") @repeat-type scroll @s-x @s-y @b-color;
+
+    // Safari 4-5, Chrome 1-9
+    background: 
+        url("@{base-url}@{image-url}") @repeat-type scroll @s-x @s-y,
+        -webkit-gradient(linear, @@direction, from(@from-color), to(@to-color));
+  
+    // Safari 5.1, Chrome 10+
+    background:
+        url("@{base-url}@{image-url}") @repeat-type scroll @s-x @s-y,
+        -webkit-linear-gradient(@direction, @from-color, @to-color);
+}
+
+
+
+
+// CSS3 相关
+
+
+// 盒模型计算模式
+// @type border-box | content-box
+.box-sizing (@type:border-box) {
+    -webkit-box-sizing: @type;
+    box-sizing: @type;
+}
+
+
+// 圆角
+.border-radius (...) {      
+    -webkit-border-radius: @arguments;
+    border-radius: @arguments;
+}
+
+
+
+// 变换
+.transition (...) {
+    -webkit-transition: @arguments;
+    transition: @arguments;
+}
+
+
+// 提供inline-block的兼容显示效果
+.inline-block () {
+    display: inline-block;
+}
+
+
+
+.interactive-cursor () {
+    cursor: pointer;
+}
+
+
+// 文字选择
+.user-select (@type:none) {
+    // webkit浏览器
+    -webkit-user-select: @type;
+    user-select: @type;
+}
+
+
+// common config
+@default-font-family: Arial, Helvetica, sans-serif;
+@default-font-size: 12px;
+@default-font-color: #666;
+@default-body-margin: 0;
+@base-url: "./img/";
+
+
+.ui-button {
+    .user-select();
+    overflow:hidden;
+    cursor:pointer;
+
+    .linear-gradient-background (top, #ffffff, #f6f6f6, #ffffff);
+    border: 1px solid #CCC;
+    font-size: 12px;
+    text-align: center;
+    color: #333;
+    padding: 0 10px;
+    vertical-align: top;
+    .border-radius(2px, 2px, 2px, 2px);
+    .interactive-cursor ();
+    .inline-block();
+    .box-sizing(content-box);
+
+    &:before {
+        content: '.';
+        visibility: hidden;
+    }
+
+    height: 23px;
+    line-height: 23px;
+}
+
+
+/**
+ * 基础按钮样式状态
+ */
+ .ui-button:focus {
+     .interactive-cursor ();
+ }
+.ui-button:active {
+    border: 1px solid #BEBEBE;
+    .linear-gradient-background (top, #f6f6f6, #ffffff, #f6f6f6);
+}
+
+.ui-button-disabled {
+    background: #f6f6f6;
+    border-color: #cfcfcf;
+    color: #999;
+}
+
+.ui-button-lf-icon {
+    float: left;
+}
+
+.ui-button-rt-icon {
+    float: right;
+}
+
+/** 春天系列 */
+.skin-spring-button,
+.skin-spring-add-button {
+    border: 1px solid #519D30;
+    color: white;
+    font-weight: bold;
+}
+.skin-spring-button {
+    .linear-gradient-background (top, #6cbb4c, #519c30, #65b445);
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+
+
+.skin-spring-add-button {
+    .linear-gradient-background-with-image (
+        top, #6cbb4c, #519c30, "ui-button-plus.gif", 9px, center, #65b445);
+    padding: 0 13px 0 27px;
+}
+
+.skin-spring-button:active,
+.skin-spring-add-button:active {
+    border: 1px solid #509c2f;
+}
+.skin-spring-button:active {
+    .linear-gradient-background (top, #519c30, #6cbb4c, #65b445);
+}
+.skin-spring-add-button:active {
+    .linear-gradient-background-with-image (
+        top, #519c30, #6cbb4c, "ui-button-plus.gif", 9px, center, #65b445);
+}
+
+.skin-spring-button:hover,
+.skin-spring-add-button:hover {
+    border: 1px solid #157106;
+}
+
+
+/** 下载系列 */
+.skin-download-button {
+    .linear-gradient-background-with-image (
+        top, #FFF, #f6f6f6, "ui-btn-download.png", 40px, center, #65b445);
+    padding-left: 12px;
+    padding-right: 25px;
+}
+.skin-download-button:active {
+    .linear-gradient-background-with-image (
+        top, #f6f6f6, #FFF, "ui-btn-download.png", 40px, center, #65b445);
+}
+
+
+
+/** 文字按钮 */
+.skin-link-button {
+    background: none;
+    border: 0 none;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+}
+
+button.skin-link-button {
+    *height: 28px;
+}
+
+.skin-link-button:active,
+.skin-link-button:hover {
+    background: none;
+    border: 0 none;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    color: blue;
+}
+
+button.skin-link-button:active,
+button.skin-link-button:hover {
+    height: 28px;
+}

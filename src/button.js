@@ -37,8 +37,17 @@ define(function ( require ) {
          */
         type: 'Button',
 
-        init: function () {
+        /**
+         * 按钮显示文字
+         * 
+         * @private
+         * @type {string}
+         */
+        content: '',
+
+        init: function ( options ) {
             var me = this;
+
             me.addDOMEvent(
                 me.main,
                 'click',
@@ -48,25 +57,23 @@ define(function ( require ) {
                     }
                 }
             );
+
+
+            var properties = lang.extend( {
+                content: this.content
+            }, options );
+
+
+            var innerDiv = this.main.firstChild;
+            if ( !properties.content 
+                && innerDiv 
+                && innerDiv.nodeName.toLowerCase() !== 'div'
+            ) {
+                properties.content = this.main.innerHTML;
+            }
+
+            this.setProperties( properties );
         },
-
-        // /**
-        //  * 销毁控件
-        //  * 
-        //  * @override
-        //  */
-        // dispose: function () {
-        //     // 调用父类清理先
-        //     Control.prototype.dispose.call( this );
-
-        //     // 清理Button类相关DOM事件
-        //     var fn = this.onClick;
-        //     if ( fn ) {
-        //         this.main.removeEventListener( 'click', fn );
-        //         fn = this.onClick = null;
-        //         delete this.onClick;
-        //     }
-        // },
 
         /**
          * 创建控件主元素
@@ -95,15 +102,17 @@ define(function ( require ) {
             // see `Button#render` and `Control#setProperties`
             if ( !changes ) {
                 if ( this.hasOwnProperty( 'height' ) ) {
-                    dom.setStyle( 'height', this.height );
-                    dom.setStyle( 'lineHeight', this.height );
+                    dom.setStyle( main, 'height', this.height );
+                    // dom.setStyle( main, 'lineHeight', this.height );
                 }
 
                 if ( this.hasOwnProperty( 'width' ) ) {
-                    dom.setStyle( 'width', this.width );
+                    dom.setStyle( main, 'width', this.width );
                 }
 
-                main.innerHTML = this.content;
+                if ( this.content ) {
+                    main.innerHTML = this.content;
+                }
 
                 return;
             }
@@ -111,12 +120,12 @@ define(function ( require ) {
                 Control.prototype.repaint.call( this, changes );
 
                 if ( changes.hasOwnProperty( 'height' ) ) {
-                    dom.setStyle( 'height', this.height );
-                    dom.setStyle( 'lineHeight', this.height );
+                    dom.setStyle( main, 'height', this.height );
+                    // dom.setStyle( main, 'lineHeight', this.height );
                 }
 
                 if ( changes.hasOwnProperty( 'width' ) ) {
-                    dom.setStyle( 'width', this.width );
+                    dom.setStyle( main, 'width', this.width );
                 }
 
                 if ( changes.hasOwnProperty( 'content' ) ) {

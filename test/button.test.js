@@ -132,20 +132,27 @@ define(function() {
 
             var b = new Button({
                 content: '.events',
+                
+                // way 1
                 onBeforeinit: handler,
                 onInit: handler,
                 onAfterinit: handler,
                 onBeforerender: handler,
                 onAfterrender: handler
             });
+
+            // way 2
             b.on( 'beforedispose', handler )
             .on( 'afterdispose', handler )
             .on( 'show', handler )
-            .on( 'hide', handler )
-            .on( 'enable', handler )
-            .on( 'disable', handler )
             .on( 'click', handler )
             .on( 'propertychange', handler );
+
+            // way 3
+            b.onhide = handler;
+            b.onenable = handler;
+            b.ondisable = handler;
+
 
             b.appendTo( document.querySelector( '#demo' ) );
             b.main.click(); // TODO: touch env
