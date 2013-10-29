@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Button - Saber Demo</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Button - Saber UI Demo</title>
     <link rel="stylesheet" href="demo.css">
     <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/1-6-6/esl.js"></script>
     <script>
@@ -69,6 +70,7 @@
             <div data-ui="type:Button;id:springAddBtn;skin:spring-add">添加</div>
             <div data-ui="type:Button;id:downloadBtn;skin:download">下载</div>
             <div data-ui="type:Button;id:actBtn;">改变文字</div>
+            <a data-ui="type:Button;skin:link">文字按钮</a>
         </div>
 
         <h2>动态化创建</h2>
@@ -158,8 +160,12 @@
             var b11 = new Button( { content: '改变文字' } );
             b11.onclick = function () {
                 b1.setContent( '新文字呦~~' );
+                b1.main.click();
             };
             b11.appendTo( wrapper2 );
+
+            var b12 = new Button( { skin: 'link', content: '文字按钮' } );
+            b12.appendTo( wrapper2 );
         }
     );
 

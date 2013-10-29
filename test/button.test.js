@@ -155,7 +155,7 @@ define(function() {
 
 
             b.appendTo( document.querySelector( '#demo' ) );
-            b.main.click(); // TODO: touch env
+            b.main.click();
             b.hide();
             b.disable();
             b.show();
