@@ -82,7 +82,7 @@ define(function ( require ) {
          * @param {Object} options 构造函数传入的配置参数
          * @return {HTMLElement}
          */
-        createMain: function() {
+        createMain: function () {
             return document.createElement('BUTTON');
         },
 
@@ -93,7 +93,7 @@ define(function ( require ) {
          * @override
          * @param {Object=} changes 变更过的属性的集合
          */
-        repaint: function( changes ) {
+        repaint: function ( changes ) {
             // if ( !this.rendered ) return;
             var main = this.main;
 

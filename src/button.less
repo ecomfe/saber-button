@@ -162,13 +162,7 @@
     color: #999;
 }
 
-.ui-button-lf-icon {
-    float: left;
-}
 
-.ui-button-rt-icon {
-    float: right;
-}
 
 /** 春天系列 */
 .skin-spring-button,
@@ -204,46 +198,53 @@
         top, #519c30, #6cbb4c, "ui-button-plus.gif", 9px, center, #65b445);
 }
 
-.skin-spring-button:hover,
-.skin-spring-add-button:hover {
+.skin-spring-button:focus,
+.skin-spring-add-button:focus {
     border: 1px solid #157106;
 }
 
 
-/** 下载系列 */
-.skin-download-button {
+.skin-spring-add-right-button {
+    border: 1px solid #519D30;
+    color: white;
+    font-weight: bold;
+    padding: 0 27px 0 13px;
     .linear-gradient-background-with-image (
-        top, #FFF, #f6f6f6, "ui-btn-download.png", 40px, center, #65b445);
-    padding-left: 12px;
-    padding-right: 25px;
+        top, #6cbb4c, #519c30, "ui-button-plus.gif", 48px, center, #65b445);
 }
-.skin-download-button:active {
+.skin-spring-add-right-button:active,
+.skin-spring-add-right-button:focus {
+    border: 1px solid #509c2f;
     .linear-gradient-background-with-image (
-        top, #f6f6f6, #FFF, "ui-btn-download.png", 40px, center, #65b445);
+        top, #519c30, #6cbb4c, "ui-button-plus.gif", 48px, center, #65b445);
 }
 
-
-
-/** 文字按钮 */
-.skin-link-button {
-    background: none;
-    border: 0 none;
-    height: 26px;
-    line-height: 26px;
-    overflow: hidden;
+.skin-spring-add-top-button {
+    border: 1px solid #519D30;
+    color: white;
+    font-weight: bold;
+    padding-top: 20px;
+    .linear-gradient-background-with-image (
+        top, #6cbb4c, #519c30, "ui-button-plus.gif", center, 5px, #65b445);
+}
+.skin-spring-add-top-button:active,
+.skin-spring-add-top-button:focus {
+    border: 1px solid #509c2f;
+    .linear-gradient-background-with-image (
+        top, #519c30, #6cbb4c, "ui-button-plus.gif", center, 5px, #65b445);
 }
 
-.skin-link-button:active,
-.skin-link-button:focus {
-    background: none;
-    border: 0 none;
-    height: 26px;
-    line-height: 26px;
-    overflow: hidden;
-    color: blue;
+.skin-spring-add-bottom-button {
+    border: 1px solid #519D30;
+    color: white;
+    font-weight: bold;
+    padding-bottom: 20px;
+    .linear-gradient-background-with-image (
+        top, #6cbb4c, #519c30, "ui-button-plus.gif", center, 25px, #65b445);
 }
-
-button.skin-link-button:active,
-button.skin-link-button:focus {
-    height: 28px;
+.skin-spring-add-bottom-button:active,
+.skin-spring-add-bottom-button:focus {
+    border: 1px solid #509c2f;
+    .linear-gradient-background-with-image (
+        top, #519c30, #6cbb4c, "ui-button-plus.gif", center, 25px, #65b445);
 }

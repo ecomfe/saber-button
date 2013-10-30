@@ -70,13 +70,14 @@
             <button data-ui="type: Button;">
                 <span>button > span</span>
             </button>
+            <div data-ui="type:Button;id:actBtn;">改变文字</div>
             <a data-ui="type: Button;">&lt;a&gt;元素</a>
             <a data-ui="type: Button;id:linkOpBtn">disable上个按钮</a>
             <span data-ui="type:Button;id:springBtn;skin:spring">spring皮肤</span>
             <div data-ui="type:Button;id:springAddBtn;skin:spring-add">添加</div>
-            <div data-ui="type:Button;id:downloadBtn;skin:download">下载</div>
-            <div data-ui="type:Button;id:actBtn;">改变文字</div>
-            <a data-ui="type:Button;skin:link">文字按钮</a>
+            <div data-ui="type:Button;id:springAddBtn;skin:spring-add-right">在右</div>
+            <div data-ui="type:Button;skin:spring-add-top;">图标在上</div>
+            <div data-ui="type:Button;skin:spring-add-bottom;">图标在下</div>
         </div>
 
         <h2>动态化创建</h2>
@@ -96,7 +97,7 @@
 
             // 静态话
             buttons = ui.init( wrapper1, {} );
-            buttons[ 10 ].onclick = function () {
+            buttons[ 5 ].onclick = function () {
                 buttons[ 0 ].setContent( '新文字呦~~' );
             };
             ui.get( 'linkOpBtn' ).onclick = function() {
@@ -161,20 +162,28 @@
             b9.appendTo( wrapper2 );
 
             var b10 = new Button({
-                skin: 'download',
-                content: '下载'
+                skin: 'spring-add-right',
+                content: '在右'
             });
             b10.appendTo( wrapper2 );
 
-            var b11 = new Button( { content: '改变文字' } );
-            b11.onclick = function () {
-                b1.setContent( '新文字呦~~' );
-                b1.main.click();
-            };
+            var b11 = new Button({
+                skin: 'spring-add-top',
+                content: '图标在上'
+            });
             b11.appendTo( wrapper2 );
 
-            var b12 = new Button( { skin: 'link', content: '文字按钮' } );
+            var b12 = new Button({
+                skin: 'spring-add-bottom',
+                content: '图标在下'
+            });
             b12.appendTo( wrapper2 );
+
+            var b13 = new Button( { content: '改变文字' } );
+            b13.onclick = function () {
+                b1.setContent( '新文字呦~~' );
+            };
+            b13.insertBefore( link1 );
         }
     );
 
