@@ -33,6 +33,12 @@
                 location: '../dep/saber-emitter/src',
                 main: 'emitter'
             },
+
+            {
+                name: 'saber-tap',
+                location: '../dep/saber-tap/src',
+                main: 'tap'
+            },
         
             {
                 name: 'saber-control',
@@ -79,11 +85,14 @@
 
     <script>
     require(
-        ['saber-dom', 'saber-ui', 'saber-button', 'css!../src/button.css'],
-        function( dom, ui, Button ) {
+        ['saber-tap', 'saber-dom', 'saber-ui', 'saber-button', 'css!../src/button.css'],
+        function( Tap, dom, ui, Button ) {
             var $ = dom.query;
             var wrapper1 = $( '#wrapper1' );
             var wrapper2 = $( '#wrapper2' );
+
+            // 修正点击延迟
+            Tap.mixin( $( '.container' ) );
 
             // 静态话
             buttons = ui.init( wrapper1, {} );
