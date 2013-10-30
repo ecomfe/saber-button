@@ -63,6 +63,7 @@
     <div class="container">
         <h2>静态化构建</h2>
         <div id="wrapper1" class="wrapper">
+            <div class="loading">初始化中...</div>
             <button data-ui="type: Button">完全默认</button>
             <button data-ui="type:Button; id:defaultBtn;">指定id</button>
             <button data-ui="type: Button; content: 指定文字;">默认文字</button>
@@ -91,12 +92,20 @@
             var $ = dom.query;
             var wrapper1 = $( '#wrapper1' );
             var wrapper2 = $( '#wrapper2' );
+            var initSuccess = function () {
+                setTimeout(
+                    function () {
+                        $( '#wrapper1 .loading' ).style.display = 'none';
+                    },
+                    500
+                );
+            };
 
             // 修正点击延迟
             Tap.mixin( $( '.container' ) );
 
             // 静态话
-            buttons = ui.init( wrapper1, {} );
+            buttons = ui.init( wrapper1, { success: initSuccess } );
             buttons[ 5 ].onclick = function () {
                 buttons[ 0 ].setContent( '新文字呦~~' );
             };
