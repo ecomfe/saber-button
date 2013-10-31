@@ -11,6 +11,7 @@ define(function ( require ) {
     var ui = require( 'saber-ui' );
     var lang = require( 'saber-lang' );
     var dom = require( 'saber-dom' );
+    var helper = require( 'saber-control/helper' );
     var Control = require( 'saber-control' );
 
     /**
@@ -48,12 +49,13 @@ define(function ( require ) {
         init: function ( options ) {
             var me = this;
 
-            me.addDOMEvent(
-                me.main,
+            helper.addDOMEvent(
+                this,
+                this.main,
                 'click',
                 function ( ev ) {
                     if ( !me.isDisabled() && !me.isHidden() ) {
-                        me.emit.call( me, 'click', ev );
+                        me.emit( 'click', ev );
                     }
                 }
             );
@@ -94,12 +96,11 @@ define(function ( require ) {
          * @param {Object=} changes 变更过的属性的集合
          */
         repaint: function ( changes ) {
-            // if ( !this.rendered ) return;
             var main = this.main;
 
             // 首次渲染时, changes 不传入
             // 非首次渲染, changes 必须传入
-            // see `Button#render` and `Control#setProperties`
+            // see `Control#render` and `Control#setProperties`
             if ( !changes ) {
                 if ( this.hasOwnProperty( 'height' ) ) {
                     dom.setStyle( main, 'height', this.height );
