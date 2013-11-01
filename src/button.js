@@ -98,41 +98,26 @@ define(function ( require ) {
         repaint: function ( changes ) {
             var main = this.main;
 
-            // 首次渲染时, changes 不传入
-            // 非首次渲染, changes 必须传入
-            // see `Control#render` and `Control#setProperties`
-            if ( !changes ) {
-                if ( this.hasOwnProperty( 'height' ) ) {
-                    dom.setStyle( main, 'height', this.height );
-                    // dom.setStyle( main, 'lineHeight', this.height );
-                }
+            // 首次渲染时, changes 不传入. see `Control#render`
+            // 非首次渲染, changes 必传入. see `Control#setProperties`
+            // 这里做下处理节约代码量
+            changes = changes || this;
 
-                if ( this.hasOwnProperty( 'width' ) ) {
-                    dom.setStyle( main, 'width', this.width );
-                }
-
-                if ( this.content ) {
-                    main.innerHTML = this.content;
-                }
-
-                return;
+            if ( changes.hasOwnProperty( 'height' ) ) {
+                dom.setStyle( main, 'height', this.height );
+                // dom.setStyle( main, 'lineHeight', this.height );
             }
-            else {
-                Control.prototype.repaint.call( this, changes );
 
-                if ( changes.hasOwnProperty( 'height' ) ) {
-                    dom.setStyle( main, 'height', this.height );
-                    // dom.setStyle( main, 'lineHeight', this.height );
-                }
-
-                if ( changes.hasOwnProperty( 'width' ) ) {
-                    dom.setStyle( main, 'width', this.width );
-                }
-
-                if ( changes.hasOwnProperty( 'content' ) ) {
-                    main.innerHTML = this.content;
-                }
+            if ( changes.hasOwnProperty( 'width' ) ) {
+                dom.setStyle( main, 'width', this.width );
             }
+
+            if ( changes.hasOwnProperty( 'content' ) ) {
+                main.innerHTML = this.content;
+            }
+
+            // 父类方法最后调用处理
+            Control.prototype.repaint.call( this, changes );
         },
 
         /**

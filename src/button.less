@@ -118,6 +118,14 @@
 @base-url: "./img/";
 
 
+
+// 状态类
+.state-hidden {
+    display: none !important;
+}
+
+
+
 .ui-button {
     .user-select();
     overflow:hidden;
@@ -148,14 +156,20 @@
 /**
  * 基础按钮样式状态
  */
- .ui-button:focus {
-     .interactive-cursor ();
- }
-.ui-button:active {
-    border: 1px solid #BEBEBE;
-    .linear-gradient-background (top, #f6f6f6, #ffffff, #f6f6f6);
+.ui-button {
+    &:focus {
+        .interactive-cursor ();
+    }
+    &:active {
+        border: 1px solid #BEBEBE;
+        .linear-gradient-background (top, #f6f6f6, #ffffff, #f6f6f6);
+    }
+    &:disabled {
+        background: #f6f6f6;
+        border-color: #cfcfcf;
+        color: #999;
+    }
 }
-
 .ui-button-disabled {
     background: #f6f6f6;
     border-color: #cfcfcf;

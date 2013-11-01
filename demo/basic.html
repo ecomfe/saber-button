@@ -68,7 +68,7 @@
             <button data-ui="type:Button; id:defaultBtn;">指定id</button>
             <button data-ui="type: Button; content: 指定文字;">默认文字</button>
             <button data-ui="type: Button; height: 40px; width: 120px;">指定高宽(40/120)</button>
-            <button data-ui="type: Button;">
+            <button data-ui="type: Button; disabled: true;">
                 <span>button > span</span>
             </button>
             <div data-ui="type:Button;id:actBtn;">改变文字</div>
@@ -105,7 +105,7 @@
             Tap.mixin( $( '.container' ) );
 
             // 静态话
-            buttons = ui.init( wrapper1, { success: initSuccess } );
+            var buttons = ui.init( wrapper1, { success: initSuccess } );
             buttons[ 5 ].onclick = function () {
                 buttons[ 0 ].setContent( '新文字呦~~' );
             };
