@@ -1,6 +1,5 @@
 define(function() {
 
-    var lang = require( 'saber-lang' );
     var ui = require( 'saber-ui' );
     var Button = require( 'saber-button' );
     var container = document.getElementById( 'demo' );

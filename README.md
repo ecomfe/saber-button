@@ -6,9 +6,9 @@ saber-button
 ### Dependencies
 
 
-+ [saber-ui](https://github.com/ecomfe/saber-ui)
 + [saber-lang](https://github.com/ecomfe/saber-lang)
 + [saber-dom](https://github.com/ecomfe/saber-dom)
++ [saber-ui](https://github.com/ecomfe/saber-ui)
 + [saber-control](https://github.com/ecomfe/saber-control)
 
 ### Usage
@@ -17,9 +17,9 @@ saber-button
 
 通过`ln`软连接依赖模块：
 
-	$ ln -s ../saber-ui ./dep/
 	$ ln -s ../saber-lang ./dep/
 	$ ln -s ../saber-dom ./dep/
+	$ ln -s ../saber-ui ./dep/
 	$ ln -s ../saber-control ./dep/
 
 ### API
