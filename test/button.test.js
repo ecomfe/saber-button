@@ -1,16 +1,60 @@
 define(function() {
 
     var lang = require( 'saber-lang' );
+    var ui = require( 'saber-ui' );
     var Button = require( 'saber-button' );
+    var container = document.getElementById( 'demo' );
+    var getText = function( node ) {
+        return node.textContent || node.innerText;
+    };
 
     describe( 'Button', function () {
-        
-        describe( 'Public API' , function () {
 
-            it( '`new`', function () {
-                var b = new Button( { content: 'new' } );
-                expect( b instanceof Button ).toBeTruthy();
+        it('should be a constructor', function () {
+            expect( typeof Button ).toEqual( 'function' );
+        });
+
+        it('should be instantiable', function () {
+            var b = new Button();
+            expect( typeof b ).toEqual( 'object' );
+            expect( b instanceof Button ).toBeTruthy();
+        });
+
+        describe( 'create via script', function () {
+            it(
+                'should create a `<button>` element as its main element',
+                function () {
+                    var button = new Button();
+                    button.appendTo( container );
+                    expect(
+                        container.querySelectorAll( 'button' ).length
+                    ).toBeGreaterThan( 0 );
+                }
+            );
+        });
+
+
+        describe('created via HTML', function () {
+
+            var button;
+            beforeEach(function () {
+                var html = '<div data-ui="type: Button;id: test;">Test Button</div>';
+                container.innerHTML = html;
+                ui.init( container );
+                button = ui.get( 'test' );
             });
+
+            it('should be able to create from HTML', function () {
+                expect( button ).toBeDefined();
+            });
+
+            it('should read `content` from HTML element', function () {
+                expect( button.get( 'content' ) ).toBe( 'Test Button' );
+            });
+
+        });
+        
+        describe( 'public api' , function () {
 
             it( '`get`', function () {
                 var b = new Button({
@@ -52,23 +96,21 @@ define(function() {
 
             it( '`appendTo`', function () {
                 var b = new Button( { content: '.appendTo' } );
-                var wrap = document.querySelector( '#demo' );
-                b.appendTo( wrap );
+                b.appendTo( container );
 
                 expect(
-                    wrap.contains( b.get( 'main' ) )
-                    && wrap.lastChild === b.get( 'main' )
+                    container.contains( b.get( 'main' ) )
+                    && container.lastChild === b.get( 'main' )
                 ).toBeTruthy();
             });
 
             it( '`insertBefore`', function () {
                 var b = new Button( { content: '.insertBefore' } );
-                var wrap = document.querySelector( '#demo' );
-                b.insertBefore( wrap.firstChild );
+                b.insertBefore( container.firstChild );
 
                 expect(
-                    wrap.contains( b.get( 'main' ) )
-                    && wrap.firstChild === b.get( 'main' )
+                    container.contains( b.get( 'main' ) )
+                    && container.firstChild === b.get( 'main' )
                 ).toBeTruthy();
             });
 
@@ -115,14 +157,16 @@ define(function() {
             it( '`setContent`', function () {
                 var b = new Button( { content: '.setContent' } );
                 b.setContent( 'customText' );
+                b.appendTo( container );
 
                 expect( b.content ).toEqual( 'customText' );
-                expect( b.get( 'content' ) ).toBeTruthy( 'customText' );
+                expect( b.get( 'content' ) ).toEqual( 'customText' );
+                expect( getText( b.main ) ).toEqual( 'customText' );
             });
 
         });
 
-        describe( 'Event API', function () {
+        describe( 'event api', function () {
             var events = {};
             var handler = function ( ev ) {
                 events[ ev.type ] = arguments.length > 1
@@ -154,7 +198,7 @@ define(function() {
             b.ondisable = handler;
 
 
-            b.appendTo( document.querySelector( '#demo' ) );
+            b.appendTo( container );
             b.main.click();
             b.hide();
             b.disable();
@@ -234,41 +278,6 @@ define(function() {
                 expect(
                     events.propertychange[0].content.newValue
                 ).toEqual( 'new content' );
-            });
-
-        });
-
-        describe( 'DOMEvent API', function () {
-            var b = new Button( { content: '.addDOMEvent'  } );
-            var count = 0;
-            var handler = function ( ev ) {
-                count++;
-            };
-
-            it( '`addDOMEvent`', function () {
-                b.addDOMEvent( b.main, 'click', handler );
-                b.main.click(); // +1
-                expect( count ).toEqual( 1 );
-            });
-
-            it( '`removeDOMEvent`', function () {
-                b.main.click(); // +1
-                b.main.click(); // +1
-                b.removeDOMEvent( b.main, 'click', handler );
-                b.main.click(); // nothing
-                b.main.click(); // nothing
-                expect( count ).toEqual( 3 );
-            });
-
-            it( '`clearDOMEvents`', function () {
-                count = 0;
-                b.addDOMEvent( b.main, 'click', handler );
-                b.addDOMEvent( b.main, 'click', handler );
-                b.addDOMEvent( b.main, 'click', handler );
-                b.main.click(); // `capture` is false
-                b.clearDOMEvents( b.main );
-                b.main.click();
-                expect( count ).toEqual( 1 );
             });
 
         });
