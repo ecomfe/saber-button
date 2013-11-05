@@ -8,21 +8,22 @@
 
 define(function ( require ) {
 
-    var ui = require( 'saber-ui' );
     var lang = require( 'saber-lang' );
     var dom = require( 'saber-dom' );
-    var helper = require( 'saber-control/helper' );
     var Control = require( 'saber-control' );
+    var helper = require( 'saber-control/helper' );
+    var component = require( 'saber-ui/component' );
 
     /**
      * 按钮控件
      * 
+     * @exports Button
      * @extends module:Control
-     * @requires ui
      * @requires lang
      * @requires dom
      * @requires Control
-     * @exports Button
+     * @requires Control~helper
+     * @requires ui~component
      */
     var Button = function() {
         Control.apply( this, arguments );
@@ -134,7 +135,7 @@ define(function ( require ) {
 
     lang.inherits( Button, Control );
 
-    ui.register( Button );
+    component.register( Button );
 
     return Button;
 
