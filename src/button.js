@@ -17,13 +17,16 @@ define(function ( require ) {
     /**
      * 按钮控件
      * 
+     * @constructor
      * @exports Button
-     * @extends module:Control
-     * @requires lang
-     * @requires dom
-     * @requires Control
-     * @requires Control~helper
-     * @requires ui~component
+     * @class
+     * @extends Control
+     * @requires saber-lang
+     * @requires saber-dom
+     * @requires saber-control
+     * @requires saber-control/helper
+     * @requires saber-ui/component
+     * @fires Button#click
      */
     var Button = function() {
         Control.apply( this, arguments );
@@ -44,6 +47,7 @@ define(function ( require ) {
          * 
          * @private
          * @type {string}
+         * @default ''
          */
         content: '',
 
@@ -54,9 +58,16 @@ define(function ( require ) {
                 this,
                 this.main,
                 'click',
-                function ( ev ) {
+                function ( event ) {
                     if ( !me.isDisabled() && !me.isHidden() ) {
-                        me.emit( 'click', ev );
+                        /**
+                         * @event Button#click
+                         * @param {Object} ev 事件参数对象
+                         * @param {string} ev.type 事件类型
+                         * @param {Control} ev.target 触发事件的控件对象
+                         * @param {Object} event MouseEvent对象
+                         */
+                        me.emit( 'click', event );
                     }
                 }
             );
@@ -82,11 +93,10 @@ define(function ( require ) {
          * 创建控件主元素
          * 
          * @override
-         * @param {Object} options 构造函数传入的配置参数
          * @return {HTMLElement}
          */
         createMain: function () {
-            return document.createElement('BUTTON');
+            return document.createElement( 'BUTTON' );
         },
 
         /**
