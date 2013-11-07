@@ -116,7 +116,6 @@ define(function ( require ) {
 
             if ( changes.hasOwnProperty( 'height' ) ) {
                 dom.setStyle( main, 'height', this.height );
-                // dom.setStyle( main, 'lineHeight', this.height );
             }
 
             if ( changes.hasOwnProperty( 'width' ) ) {
