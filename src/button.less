@@ -1,7 +1,3 @@
-/**
- * 基础按钮样式
- */
-
 // 无图标线性渐变背景
 // @direction 渐变方向
 // @from-color 起始颜色
@@ -83,20 +79,13 @@
 
 
 
-// 变换
-.transition (...) {
-    -webkit-transition: @arguments;
-    transition: @arguments;
-}
-
-
 // 提供inline-block的兼容显示效果
 .inline-block () {
     display: inline-block;
 }
 
 
-
+//
 .interactive-cursor () {
     cursor: pointer;
 }
@@ -104,59 +93,40 @@
 
 // 文字选择
 .user-select (@type:none) {
-    // webkit浏览器
     -webkit-user-select: @type;
     user-select: @type;
 }
 
 
 // common config
-@default-font-family: Arial, Helvetica, sans-serif;
-@default-font-size: 12px;
-@default-font-color: #666;
-@default-body-margin: 0;
 @base-url: "./img/";
 
 
 
-// 状态类
 .state-hidden {
     display: none !important;
 }
-
-
 
 .ui-button {
     .user-select();
     overflow:hidden;
     cursor:pointer;
 
-    .linear-gradient-background (top, #ffffff, #f6f6f6, #ffffff);
-    border: 1px solid #CCC;
-    font-size: 12px;
-    text-align: center;
-    color: #333;
-    padding: 0 10px;
-    vertical-align: top;
-    .border-radius(2px, 2px, 2px, 2px);
-    .interactive-cursor ();
     .inline-block();
     .box-sizing(content-box);
 
-    &:before {
-        content: '.';
-        visibility: hidden;
-    }
+    text-align: center;
+    vertical-align: top;
 
-    height: 23px;
-    line-height: 23px;
-}
+    padding: .2rem .4rem;
+    font-size: 1rem;
+
+    .linear-gradient-background (top, #ffffff, #f6f6f6, #ffffff);
+    border: 1px solid #CCC;
+    .border-radius(2px, 2px, 2px, 2px);
+    .interactive-cursor ();
 
 
-/**
- * 基础按钮样式状态
- */
-.ui-button {
     &:focus {
         .interactive-cursor ();
     }
@@ -170,6 +140,7 @@
         color: #999;
     }
 }
+
 .ui-button-disabled {
     background: #f6f6f6;
     border-color: #cfcfcf;
@@ -180,16 +151,41 @@
 
 /** 春天系列 */
 .skin-spring-button,
-.skin-spring-add-button {
+.skin-spring-add-button,
+.skin-spring-add-right-button,
+.skin-spring-add-top-button,
+.skin-spring-add-bottom-button {
     border: 1px solid #519D30;
     color: white;
     font-weight: bold;
 }
+
+.skin-spring-button:focus,
+.skin-spring-add-button:focus,
+.skin-spring-add-right-button:focus,
+.skin-spring-add-top-button:focus,
+.skin-spring-add-bottom-button:focus {
+    border: 1px solid #157106;
+}
+
+.skin-spring-button:active,
+.skin-spring-add-button:active,
+.skin-spring-add-right-button:active,
+.skin-spring-add-top-button:active,
+.skin-spring-add-bottom-button:active {
+    border: 1px solid #509c2f;
+}
+
+
+
 .skin-spring-button {
     .linear-gradient-background (top, #6cbb4c, #519c30, #65b445);
     padding: 0 10px;
     height: 30px;
     line-height: 30px;
+}
+.skin-spring-button:active {
+    .linear-gradient-background (top, #519c30, #6cbb4c, #65b445);
 }
 
 
@@ -197,67 +193,46 @@
 .skin-spring-add-button {
     .linear-gradient-background-with-image (
         top, #6cbb4c, #519c30, "ui-button-plus.gif", 9px, center, #65b445);
-    padding: 0 13px 0 27px;
-}
-
-.skin-spring-button:active,
-.skin-spring-add-button:active {
-    border: 1px solid #509c2f;
-}
-.skin-spring-button:active {
-    .linear-gradient-background (top, #519c30, #6cbb4c, #65b445);
+    padding-left: 27px;
+    padding-right: 13px;
 }
 .skin-spring-add-button:active {
     .linear-gradient-background-with-image (
         top, #519c30, #6cbb4c, "ui-button-plus.gif", 9px, center, #65b445);
 }
 
-.skin-spring-button:focus,
-.skin-spring-add-button:focus {
-    border: 1px solid #157106;
-}
-
 
 .skin-spring-add-right-button {
-    border: 1px solid #519D30;
-    color: white;
-    font-weight: bold;
-    padding: 0 27px 0 13px;
+    padding-left: 13px;
+    padding-right: 27px;
     .linear-gradient-background-with-image (
         top, #6cbb4c, #519c30, "ui-button-plus.gif", 48px, center, #65b445);
 }
-.skin-spring-add-right-button:active,
-.skin-spring-add-right-button:focus {
+.skin-spring-add-right-button:active {
     border: 1px solid #509c2f;
     .linear-gradient-background-with-image (
         top, #519c30, #6cbb4c, "ui-button-plus.gif", 48px, center, #65b445);
 }
 
+
 .skin-spring-add-top-button {
-    border: 1px solid #519D30;
-    color: white;
-    font-weight: bold;
     padding-top: 20px;
     .linear-gradient-background-with-image (
         top, #6cbb4c, #519c30, "ui-button-plus.gif", center, 5px, #65b445);
 }
-.skin-spring-add-top-button:active,
-.skin-spring-add-top-button:focus {
+.skin-spring-add-top-button:active {
     border: 1px solid #509c2f;
     .linear-gradient-background-with-image (
         top, #519c30, #6cbb4c, "ui-button-plus.gif", center, 5px, #65b445);
 }
 
+
 .skin-spring-add-bottom-button {
-    border: 1px solid #519D30;
-    color: white;
-    font-weight: bold;
     padding-bottom: 20px;
     .linear-gradient-background-with-image (
         top, #6cbb4c, #519c30, "ui-button-plus.gif", center, 25px, #65b445);
 }
-.skin-spring-add-bottom-button:active,
-.skin-spring-add-bottom-button:focus {
+.skin-spring-add-bottom-button:active {
     border: 1px solid #509c2f;
     .linear-gradient-background-with-image (
         top, #519c30, #6cbb4c, "ui-button-plus.gif", center, 25px, #65b445);
