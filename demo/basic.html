@@ -32,6 +32,12 @@
             },
 
             {
+                name: 'saber-tap',
+                location: '../dep/saber-tap/src',
+                main: 'tap'
+            },
+
+            {
                 name: 'saber-ui',
                 location: '../dep/saber-ui/src',
                 main: 'main'
@@ -86,11 +92,12 @@
     <script>
     require(
         [
+            'saber-tap',
             'saber-dom/selector',
             'saber-ui',
             'saber-button', 'css!../src/button.css'
         ],
-        function( selector, ui, Button ) {
+        function( Tap, selector, ui, Button ) {
             var $ = selector.query;
             var wrapper1 = $( '#wrapper1' );
             var wrapper2 = $( '#wrapper2' );
@@ -102,6 +109,9 @@
                     500
                 );
             };
+
+            // 300ms 点击延迟修复
+            Tap.mixin( $( '.container' ) );
 
 
             // 静态化
@@ -195,6 +205,8 @@
             b13.insertBefore( link1 );
         }
     );
+
+    document.addEventListener( 'touchstart', function(){}, false );
     </script>
 </body>
 </html>
