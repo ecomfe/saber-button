@@ -37,7 +37,7 @@ define(function() {
 
             var button;
             beforeEach(function () {
-                var html = '<div data-ui="type: Button;id: test;">Test Button</div>';
+                var html = '<div data-ui="type: Button;id: test;">Test Button <span>123</span></div>';
                 container.innerHTML = html;
                 ui.init( container );
                 button = ui.get( 'test' );
@@ -48,7 +48,7 @@ define(function() {
             });
 
             it('should read `content` from HTML element', function () {
-                expect( button.get( 'content' ) ).toBe( 'Test Button' );
+                expect( button.get( 'content' ) ).toBe( 'Test Button <span>123</span>' );
             });
 
         });

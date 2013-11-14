@@ -74,17 +74,8 @@ define(function ( require ) {
 
 
             var properties = lang.extend( {
-                content: this.content
+                content: this.content || this.main.innerHTML
             }, options );
-
-
-            var innerDiv = this.main.firstChild;
-            if ( !properties.content 
-                && innerDiv 
-                && innerDiv.nodeName.toLowerCase() !== 'div'
-            ) {
-                properties.content = this.main.innerHTML;
-            }
 
             this.setProperties( properties );
         },
