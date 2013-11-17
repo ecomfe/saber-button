@@ -27,6 +27,11 @@ define(function ( require ) {
      * @requires saber-control/helper
      * @requires saber-ui/component
      * @fires Button#click
+     * @param {Object=} options 初始化配置参数
+     * @param {string=} options.id 控件标识
+     * @param {HTMLElement=} options.main 控件主元素
+     * @param {string=} options.skin 控件皮肤
+     * @param {*=} options.* 其余初始化参数由各控件自身决定
      */
     var Button = function() {
         Control.apply( this, arguments );
