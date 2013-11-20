@@ -23,7 +23,7 @@
 
 + `content`: 按钮显示文字
 
-更多配置项，请参考父类[`Control`](https://github.com/ecomfe/saber-control#option)
+更多配置项，请参考父类[`Control`](https://github.com/ecomfe/saber-control/blob/master/doc/api-control.md#option)
 
 
 ### Property
@@ -39,7 +39,7 @@ var button = new Button({ content: 'test' });
 console.info( button.get( 'content' ) ); // test
 ```
 
-更多实例属性，请参考父类[`Control`](https://github.com/ecomfe/saber-control#property)
+更多实例属性，请参考父类[`Control`](https://github.com/ecomfe/saber-control/blob/master/doc/api-control.md#property)
 
 
 ### Method
@@ -58,7 +58,7 @@ console.info( button.get( 'content' ) ); // test
 button.setContent( 'new' );
 console.info( button.get( 'content' ) ); // new
 ```
-更多实例方法，请参考父类[`Control`](https://github.com/ecomfe/saber-control#api)
+更多实例方法，请参考父类[`Control`](https://github.com/ecomfe/saber-control/blob/master/doc/api-control.md#method)
 
 
 ### Event
@@ -75,7 +75,7 @@ console.info( button.get( 'content' ) ); // new
 `event`: DOM原生事件对象
 
 
-更多事件，请参考父类[`Control`](https://github.com/ecomfe/saber-control#event)
+更多事件，请参考父类[`Control`](https://github.com/ecomfe/saber-control/blob/master/doc/api-control.md#event)
 
 
 
